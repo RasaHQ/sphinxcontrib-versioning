@@ -25,29 +25,32 @@
     </div>
 </div>
 {% elif html_theme == 'rasabaster' %}
-
-<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-        <span class="fa fa-book"> Other Versions</span>
+<div class="versions">
+    <div>
+      <span class="current-version">
         v: {{ current_version }}
-        <span class="fa fa-caret-down"></span>
-    </span>
-    <div class="rst-other-versions">
+      </span>
+    </div>
+    <div class="other-versions">
         {%- if versions.tags %}
-        <dl>
-            <dt>Tags</dt>
+        <div class="dropdown">
+          <button class="dropdown-btn">tags</button>
+          <div class="dropdown-content">
             {%- for name, url in versions.tags %}
-            <dd><a href="{{ url }}">{{ name }}</a></dd>
+              <a href="{{ url }}">{{ name }}</a>
             {%- endfor %}
-        </dl>
+          </div>
+        </div>
         {%- endif %}
         {%- if versions.branches %}
-        <dl>
-            <dt>Branches</dt>
+        <div class="dropdown">
+          <button class="dropdown-btn">tags</button>
+          <div class="dropdown-content">
             {%- for name, url in versions.branches %}
-            <dd><a href="{{ url }}">{{ name }}</a></dd>
+              <a href="{{ url }}">{{ name }}</a>
             {%- endfor %}
-        </dl>
+          </div>
+        </div>
         {%- endif %}
     </div>
 </div>
