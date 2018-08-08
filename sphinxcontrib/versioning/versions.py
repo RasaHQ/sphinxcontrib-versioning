@@ -231,11 +231,11 @@ class Versions(object):
         is_root = self.context['scv_is_root']
         pagename = self.context['pagename']
         if self.context['current_version'] == other_version and not is_root:
-            return '{}.html'.format(pagename.split('/')[-1])
+            return '{}/'.format(pagename.split('/')[-1])
 
         other_remote = self[other_version]
         other_root_dir = other_remote['root_dir']
-        components = ['..'] * pagename.count('/')
+        components = ['..'] * (pagename.count('/') + 1 )
         components += [other_root_dir] if is_root else ['..', other_root_dir]
         components += [pagename if self.vhasdoc(other_version) else other_remote['master_doc']]
-        return '{}.html'.format(__import__('posixpath').join(*components))
+        return '{}/'.format(__import__('posixpath').join(*components))
