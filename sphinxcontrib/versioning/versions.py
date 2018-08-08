@@ -230,10 +230,10 @@ class Versions(object):
         """
         is_root = self.context['scv_is_root']
         pagename = self.context['pagename'].replace('index','')
-        if self.context['current_version'] == other_version and not is_root:
+        #if self.context['current_version'] == other_version and not is_root:
             #_page = pagename.split('/')[-1]
             #_page = '' if _page == 'index' else _page
-            return '{}/'.format(pagename.split('/')[-1])
+        #    return '{}/'.format(pagename.split('/')[-1])
 
         other_remote = self[other_version]
         other_root_dir = other_remote['root_dir']
