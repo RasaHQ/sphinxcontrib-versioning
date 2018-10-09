@@ -229,13 +229,17 @@ class Versions(object):
         :rtype: str
         """
         is_root = self.context['scv_is_root']
-        pagename = self.context['pagename']
-        if self.context['current_version'] == other_version and not is_root:
-            return '{}.html'.format(pagename.split('/')[-1])
+        is_index = 'index' in self.context['pagename']
+        pagename = self.context['pagename'].replace('index','')
+        pagename = self.context['pagename'].replace('//','/')
 
         other_remote = self[other_version]
         other_root_dir = other_remote['root_dir']
-        components = ['..'] * pagename.count('/')
-        components += [other_root_dir] if is_root else ['..', other_root_dir]
-        components += [pagename if self.vhasdoc(other_version) else other_remote['master_doc']]
-        return '{}.html'.format(__import__('posixpath').join(*components))
+        if is_index: 
+            components = ['..'] * pagename.count('/')
+        else:
+            components = ['..'] *( pagename.count('/') + 1)
+        components += ['.', other_root_dir] if is_root else ['..', other_root_dir]
+        components += [pagename.replace('index','') if self.vhasdoc(other_version) else other_remote['master_doc']]
+        result = '{}/'.format(__import__('posixpath').join(*components)).replace('//','/')
+        return result

@@ -24,6 +24,36 @@
         {%- endif %}
     </div>
 </div>
+{% elif html_theme == 'rasabaster' %}
+<div class="versions">
+    <p class="caption">Versions</p>
+    <div class="versions-content">
+      <div>
+        <span class="current-version">
+          viewing: {{ current_version }}
+        </span>
+      </div>
+      <div class="other-versions">
+          {%- if versions.tags %}
+          <p>tags</p>
+          <div class="dropdown-content">
+            {%- for name, url in versions.tags %}
+              <a href="{{ url }}">{{ name }}</a>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+          {%- if versions.branches %}
+          <p>branches</p>
+          <div class="dropdown-content">
+            {%- for name, url in versions.branches %}
+              <a href="{{ url }}">{{ name }}</a>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+      </div>
+    </div>
+</div>
+
 {% else %}
 <h3>{{ _('Versions') }}</h3>
 <ul>
